@@ -1,4 +1,4 @@
-<%= form_for(@question) do |f| %>
+<%= form_for setup_question(@question) do |f| %>
   <% if @question.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
@@ -22,4 +22,61 @@
   <div class="actions">
     <%= f.submit %>
   </div>
+
+  <h3>Answers</h3>
+
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Answer</th>
+        <th>Correct?</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= @question.answers.each do |answer| %>
+        <%= fields_for :answers do |fa| %>
+        <tr>
+          <td>
+            <%= fa.hidden_field :id %>
+            <div class="field">
+              <%= fa.label :answer %><br>
+              <%= fa.text_area :answer %>
+            </div>
+          </td>
+          <td>
+            <div class="field">
+              <%= fa.label :is_correct %><br>
+              <%= fa.check_box :is_correct %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+      <% end %>
+    </tbody>
+  </table>
+
+
+  <h3>Hints</h3>
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Hint</th>
+      </tr>
+    </thead>
+
+    <tbody>
+        <%= fields_for :hints do |fh| %>
+        <tr>
+          <td>
+            <%= fh.hidden_field :id %>
+            <div class="field">
+            <%= fh.label :hint %><br>
+            <%= fh.text_area :hint %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
 <% end %>

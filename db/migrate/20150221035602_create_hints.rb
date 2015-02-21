@@ -3,9 +3,10 @@ class CreateHints < ActiveRecord::Migration
     create_table :hints do |t|
       t.text :hint
       t.integer :order
-      t.quesion :belongs_to
+      t.integer :question_id
 
       t.timestamps null: false
     end
+    add_foreign_key :hints, :questions
   end
 end
