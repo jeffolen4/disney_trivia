@@ -3,7 +3,7 @@ class CreateHints < ActiveRecord::Migration
     create_table :hints do |t|
       t.text :hint
       t.integer :order
-      t.integer :question_id
+      t.references :question, index: true
 
       t.timestamps null: false
     end

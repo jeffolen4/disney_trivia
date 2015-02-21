@@ -1,10 +1,11 @@
 class AnswersController < ApplicationController
+  before_filter :set_question
   before_action :set_answer, only: [:show, :edit, :update, :destroy]
 
   # GET /answers
   # GET /answers.json
   def index
-    @answers = Answer.all
+    @answers = @question.answers
   end
 
   # GET /answers/1
@@ -14,7 +15,7 @@ class AnswersController < ApplicationController
 
   # GET /answers/new
   def new
-    @answer = Answer.new
+    @answer = Answer.new(@question.id)
   end
 
   # GET /answers/1/edit
@@ -62,6 +63,11 @@ class AnswersController < ApplicationController
   end
 
   private
+
+    def set_question
+      @question = Question.find(params[:question_id])
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_answer
       @answer = Answer.find(params[:id])
@@ -69,6 +75,6 @@ class AnswersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def answer_params
-      params.require(:answer).permit(:answer, :is_correct, :belongs_to)
+      params.require(:answer).permit(:answer, :is_correct, :question_id)
     end
 end

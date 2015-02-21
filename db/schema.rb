@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 20150221035602) do
     t.datetime "updated_at",  null: false
   end
 
+  add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
+
   create_table "hints", force: :cascade do |t|
     t.text     "hint"
     t.integer  "order"
@@ -31,6 +33,8 @@ ActiveRecord::Schema.define(version: 20150221035602) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  add_index "hints", ["question_id"], name: "index_hints_on_question_id", using: :btree
 
   create_table "questions", force: :cascade do |t|
     t.text     "question"

@@ -1,4 +1,5 @@
 class HintsController < ApplicationController
+  before_filter :set_question
   before_action :set_hint, only: [:show, :edit, :update, :destroy]
 
   # GET /hints
@@ -62,6 +63,11 @@ class HintsController < ApplicationController
   end
 
   private
+
+    def set_question
+      @question = Question.find(params[:question_id])
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_hint
       @hint = Hint.find(params[:id])
@@ -69,6 +75,6 @@ class HintsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def hint_params
-      params.require(:hint).permit(:hint, :order, :belongs_to)
+      params.require(:hint).permit(:hint, :order, :question_id)
     end
 end

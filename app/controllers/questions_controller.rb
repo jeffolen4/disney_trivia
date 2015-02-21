@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.includes(:hints).includes(:answers).all
+    @questions = Question.includes(:hints, :answers).all
   end
 
   # GET /questions/1

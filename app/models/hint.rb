@@ -1,5 +1,5 @@
 class Hint < ActiveRecord::Base
   belongs_to :question
 
-  validates :hint, presence: true
+  validates_presence_of :hint
 end
