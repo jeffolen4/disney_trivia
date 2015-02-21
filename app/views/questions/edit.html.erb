@@ -1,8 +1,12 @@
-<h1>Editing Question</h1>
+<% provide(:title, "Edit Question | Disney Trivia") %>
+
+<%= render 'header' %>
+
+<h3>Editing Question</h3>
 
 <%= render 'form' %>
 
-<%= link_to "<button>Show</button>".html_safe, @question %>
-<%= link_to "<button>Back</button>".html_safe, questions_path %>
+<%= link_to "<button class=\"btn-primary btn-small\">Show</button>".html_safe, @question %>
+<%= link_to "<button class=\"btn-primary btn-small\">Back</button>".html_safe, questions_path %>
 
 <%= render 'footer' %>

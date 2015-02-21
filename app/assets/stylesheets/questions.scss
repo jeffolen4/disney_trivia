@@ -1,3 +1,49 @@
 // Place all the styles related to the questions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+html, body {
+  /*background: url("../img/waltdisney_background.jpeg") no-repeat center center fixed;*/
+  background: image_url('logo_2.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover; /* For WebKit*/
+  -moz-background-size: cover;    /* Mozilla*/
+  -o-background-size: cover;      /* Opera*/
+  background-size: cover;
+}
+
+.container {
+  /*background-image: url("../img/waltdisney_background.jpeg");*/
+  /*color: #1A0000;*/
+  /*color: #333300;*/
+  color: #A3D1FF;
+}
+
+.inset { text-shadow:#fff 0px 1px 0, #000 0 -1px 0;}
+
+.page-header {
+    font-size: 30px
+
+}
+
+.wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 400px;
+    height: 100px;
+    border: 1px solid black;
+}
+
+#slide {
+    position: absolute;
+    left: -400px;
+    width: 400px;
+    height: 100px;
+    background: black;
+    -webkit-animation: slide 0.5s forwards;
+    -webkit-animation-delay: 0.25s;
+    animation: slide 0.5s forwards;
+    animation-delay: 0.25s;
+}
+
+@-webkit-keyframes slide {
+    100% { left: 0; }
+}

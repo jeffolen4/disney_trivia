@@ -1,8 +1,12 @@
+<% provide(:title, "Questions List | Disney Trivia") %>
+
+<%= render 'header' %>
+
 <p id="notice"><%= notice %></p>
 
 <h3>Listing Questions</h3>
 
-<table class="table table-bordered table-hover">
+<table class="table table-bordered">
   <thead>
     <tr>
       <th class="col-md-7">Question</th>
@@ -17,11 +21,9 @@
         <td><%= question.question %></td>
         <td><%= question.active ? "Yes" : "No" %></td>
         <td>
-          <div class="btn-group btn-group-xs" role="group">
-            <%= link_to "<button>Show</button>".html_safe, question %>
-            <%= link_to "<button>Edit</button>".html_safe, edit_question_path(question) %>
-            <%= link_to "<button>Delete</button>".html_safe, question, { method: :delete, data: { confirm: 'Are you sure?' } } %>
-          </div>
+            <%= link_to "<button class=\"btn-primary btn-mini\">Show</button>".html_safe, question %>
+            <%= link_to "<button class=\"btn-primary btn-mini\">Edit</button>".html_safe, edit_question_path(question) %>
+            <%= link_to "<button class=\"btn-primary btn-mini\">Delete</button>".html_safe, question, { method: :delete, data: { confirm: 'Are you sure?' } } %>
         </td>
       </tr>
     <% end %>
@@ -30,6 +32,6 @@
 
 <br>
 
-<%= link_to "<button>New Question</button>".html_safe, new_question_path %>
+<%= link_to "<button class=\"btn-primary btn-small\">New Question</button>".html_safe, new_question_path %>
 
 <%= render 'footer' %>

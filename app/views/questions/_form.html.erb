@@ -1,7 +1,7 @@
 <%= form_for setup_question( @question ), :html => { :class => "form-inline", :role => "form" } do |f| %>
   <% if @question.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
+      <h3><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h3>
 
       <ul>
       <% @question.errors.full_messages.each do |message| %>
@@ -23,7 +23,7 @@
 
   <h3>Answers</h3>
 
-  <table class="table table-bordered table-hover">
+  <table class="table table-bordered">
     <thead>
       <tr>
         <th>Answer</th>
@@ -47,7 +47,7 @@
           </td>
           <td>
             <% if fa.object.persisted? %>
-            <%= link_to "<button>Delete</button>".html_safe, [ @question, fa.object ], { method: :delete, data: { confirm: 'Are you sure?' } } %>
+            <%= link_to "<button class=\"btn-mini btn-primary\" role=\"button\">Delete</button>".html_safe, [ @question, fa.object ], { method: :delete, data: { confirm: 'Are you sure?' } } %>
             <% end %>
           </td>
         </tr>
@@ -57,7 +57,7 @@
 
 
   <h3>Hints</h3>
-  <table class="table table-bordered table-hover">
+  <table class="table table-bordered">
     <thead>
       <tr>
         <th>Hint</th>
@@ -74,7 +74,7 @@
           </td>
           <td>
             <% if fh.object.persisted? %>
-            <%= link_to "<button>Delete</button>".html_safe, [ @question, fh.object ],  { method: :delete, data: { confirm: 'Are you sure?' } } %>
+            <%= link_to "<button class=\"btn-primary btn-mini\">Delete</button>".html_safe, [ @question, fh.object ],  { method: :delete, data: { confirm: 'Are you sure?' } } %>
             <% end %>
           </td>
         </tr>
@@ -84,7 +84,7 @@
 
   <div class="actions">
     <br>
-    <%= f.submit %>
+    <%= f.submit :class => "btn-small btn-primary"  %>
   </div>
 
 <% end %>
