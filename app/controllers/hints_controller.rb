@@ -5,7 +5,7 @@ class HintsController < ApplicationController
   # GET /hints
   # GET /hints.json
   def index
-    @hints = Hint.all
+    @hints = @question.hints
   end
 
   # GET /hints/1
@@ -75,6 +75,6 @@ class HintsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def hint_params
-      params.require(:hint).permit(:hint, :order, :question_id)
+      params.require(:hint).permit(:id, :hint, :order, :question_id)
     end
 end

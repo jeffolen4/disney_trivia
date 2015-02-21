@@ -1,5 +1,9 @@
 <p id="notice"><%= notice %></p>
 
+<h3>View Question</h3>
+
+<%= form_for @question, :html => { :class => "form-inline", :role => "form" } do |f| %>
+
 <p>
   <strong>Question:</strong>
   <%= @question.question %>
@@ -10,5 +14,71 @@
   <%= @question.active %>
 </p>
 
-<%= link_to 'Edit', edit_question_path(@question) %> |
-<%= link_to 'Back', questions_path %>
+
+  <h3>Answers</h3>
+
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Answer</th>
+        <th>Correct?</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+        <%= f.fields_for :answers do |fa| %>
+        <tr>
+          <td class="col-md-11">
+            <div class="field">
+              <%= fa.text_area :answer, { :class => "form-control", :style => "width: 100%", :rows => "1" } %>
+            </div>
+          </td>
+          <td class="col-md-1">
+            <div class="field">
+              <%= fa.check_box :is_correct %>
+            </div>
+          </td>
+          <td>
+            <% if fa.object.persisted? %>
+            <%= link_to "<button>Delete</button>".html_safe, [ @question, fa.object ], { method: :delete, data: { confirm: 'Are you sure?' } } %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+
+  <h3>Hints</h3>
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Hint</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+        <%= f.fields_for :hints do |fh| %>
+        <tr>
+          <td class="col-md-11">
+            <div class="field">
+            <%= fh.text_area :hint, { :class => "form-control", :style => "width: 100%", :rows => "1" } %>
+          </td>
+          <td>
+            <% if fh.object.persisted? %>
+            <%= link_to "<button>Delete</button>".html_safe, [ @question, fh.object ],  { method: :delete, data: { confirm: 'Are you sure?' } } %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<% end %>
+
+<%= link_to "<button>Edit</button>".html_safe, edit_question_path(@question) %>
+<%= link_to "<button>Back</button>".html_safe, questions_path %>
+
+<%= render 'footer' %>

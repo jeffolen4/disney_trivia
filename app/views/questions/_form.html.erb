@@ -1,4 +1,4 @@
-<%= form_for setup_question( @question ) do |f| %>
+<%= form_for setup_question( @question ), :html => { :class => "form-inline", :role => "form" } do |f| %>
   <% if @question.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
@@ -11,17 +11,14 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :question %><br>
-    <%= f.text_area :question %>
-    <%= hidden_field( :question, :id ) %>
+  <div class="field form-group" style="width: 100%">
+    <%= f.label :question %>
+    <%= f.text_area :question, { :class => "form-control", :style => "width: 65%" } %>
+    <%= f.hidden_field :id %>
   </div>
-  <div class="field">
-    <%= f.label :active %><br>
-    <%= f.check_box :active %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="field form-group">
+    <%= f.label :active %>
+    <%= f.check_box :active, { :class => "form-control" } %>
   </div>
 
   <h3>Answers</h3>
@@ -31,24 +28,27 @@
       <tr>
         <th>Answer</th>
         <th>Correct?</th>
+        <th>Actions</th>
       </tr>
     </thead>
 
     <tbody>
         <%= f.fields_for :answers do |fa| %>
         <tr>
-          <td>
-            <%= fa.hidden_field :id %>
+          <td class="col-md-11">
             <div class="field">
-              <%= fa.label :answer %><br>
-              <%= fa.text_area :answer %>
+              <%= fa.text_area :answer, { :class => "form-control", :style => "width: 100%", :rows => "1" } %>
+            </div>
+          </td>
+          <td class="col-md-1">
+            <div class="field">
+              <%= fa.check_box :is_correct %>
             </div>
           </td>
           <td>
-            <div class="field">
-              <%= fa.label :is_correct %><br>
-              <%= fa.check_box :is_correct %>
-            </div>
+            <% if fa.object.persisted? %>
+            <%= link_to "<button>Delete</button>".html_safe, [ @question, fa.object ], { method: :delete, data: { confirm: 'Are you sure?' } } %>
+            <% end %>
           </td>
         </tr>
       <% end %>
@@ -61,21 +61,30 @@
     <thead>
       <tr>
         <th>Hint</th>
+        <th>Actions</th>
       </tr>
     </thead>
 
     <tbody>
         <%= f.fields_for :hints do |fh| %>
         <tr>
-          <td>
-            <%= fh.hidden_field :id %>
+          <td class="col-md-11">
             <div class="field">
-            <%= fh.label :hint %><br>
-            <%= fh.text_area :hint %>
+            <%= fh.text_area :hint, { :class => "form-control", :style => "width: 100%", :rows => "1" } %>
+          </td>
+          <td>
+            <% if fh.object.persisted? %>
+            <%= link_to "<button>Delete</button>".html_safe, [ @question, fh.object ],  { method: :delete, data: { confirm: 'Are you sure?' } } %>
+            <% end %>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
+
+  <div class="actions">
+    <br>
+    <%= f.submit %>
+  </div>
 
 <% end %>

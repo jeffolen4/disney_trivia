@@ -4,6 +4,12 @@ class Question < ActiveRecord::Base
 
   validates :question, presence: true
 
-  accepts_nested_attributes_for :answers
-  accepts_nested_attributes_for :hints
+  accepts_nested_attributes_for :answers,
+    :allow_destroy => true,
+    :reject_if => :all_blank
+
+  accepts_nested_attributes_for :hints,
+    :allow_destroy => true,
+    :reject_if => :all_blank
+  
 end

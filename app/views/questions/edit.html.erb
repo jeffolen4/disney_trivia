@@ -2,5 +2,7 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @question %> |
-<%= link_to 'Back', questions_path %>
+<%= link_to "<button>Show</button>".html_safe, @question %>
+<%= link_to "<button>Back</button>".html_safe, questions_path %>
+
+<%= render 'footer' %>

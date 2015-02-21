@@ -5,9 +5,9 @@
 <table class="table table-bordered table-hover">
   <thead>
     <tr>
-      <th>Question</th>
-      <th>Active</th>
-      <th colspan="3"></th>
+      <th class="col-md-7">Question</th>
+      <th class="col-md-1">Active</th>
+      <th class="col-md-4">Actions</th>
     </tr>
   </thead>
 
@@ -16,9 +16,13 @@
       <tr>
         <td><%= question.question %></td>
         <td><%= question.active ? "Yes" : "No" %></td>
-        <td><%= link_to 'Show', question %></td>
-        <td><%= link_to 'Edit', edit_question_path(question) %></td>
-        <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <div class="btn-group btn-group-xs" role="group">
+            <%= link_to "<button>Show</button>".html_safe, question %>
+            <%= link_to "<button>Edit</button>".html_safe, edit_question_path(question) %>
+            <%= link_to "<button>Delete</button>".html_safe, question, { method: :delete, data: { confirm: 'Are you sure?' } } %>
+          </div>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +30,6 @@
 
 <br>
 
-<%= link_to 'New Question', new_question_path %>
+<%= link_to "<button>New Question</button>".html_safe, new_question_path %>
+
+<%= render 'footer' %>

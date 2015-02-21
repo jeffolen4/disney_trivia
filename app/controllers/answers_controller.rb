@@ -11,11 +11,12 @@ class AnswersController < ApplicationController
   # GET /answers/1
   # GET /answers/1.json
   def show
+    @answer = @question.answers.find(params[:id])
   end
 
   # GET /answers/new
   def new
-    @answer = Answer.new(@question.id)
+    @answer = Answer.new
   end
 
   # GET /answers/1/edit
@@ -57,7 +58,7 @@ class AnswersController < ApplicationController
   def destroy
     @answer.destroy
     respond_to do |format|
-      format.html { redirect_to answers_url, notice: 'Answer was successfully destroyed.' }
+      format.html { redirect_to edit_question_path(@question), notice: 'Answer was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -65,16 +66,18 @@ class AnswersController < ApplicationController
   private
 
     def set_question
+      logger.debug "set question params: #{params}."
       @question = Question.find(params[:question_id])
     end
 
     # Use callbacks to share common setup or constraints between actions.
     def set_answer
+      logger.debug "set answer params: #{params}."
       @answer = Answer.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def answer_params
-      params.require(:answer).permit(:answer, :is_correct, :question_id)
+      params.require(:answer).permit(:id, :answer, :is_correct, :question_id)
     end
 end
