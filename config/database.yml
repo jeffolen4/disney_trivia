@@ -29,6 +29,6 @@ test:
 
 production:
   <<: *default
-  database: disney_trivia_production
-  username: disney_trivia
-  password: <%= ENV['DISNEY_TRIVIA_DATABASE_PASSWORD'] %>
+  database: <%= ENV['DATABASE_URL']
+  # username: eadrayuiuvgksm
+  # password: <%= ENV['DISNEY_TRIVIA_DATABASE_PASSWORD'] %>
