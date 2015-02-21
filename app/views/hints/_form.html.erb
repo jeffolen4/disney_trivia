@@ -1,0 +1,29 @@
+<%= form_for(@hint) do |f| %>
+  <% if @hint.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@hint.errors.count, "error") %> prohibited this hint from being saved:</h2>
+
+      <ul>
+      <% @hint.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :hint %><br>
+    <%= f.text_area :hint %>
+  </div>
+  <div class="field">
+    <%= f.label :order %><br>
+    <%= f.number_field :order %>
+  </div>
+  <div class="field">
+    <%= f.label :belongs_to %><br>
+    <%= f.text_field :belongs_to %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
